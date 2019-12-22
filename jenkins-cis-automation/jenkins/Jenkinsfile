@@ -43,8 +43,8 @@ pipeline {
         AMI_TYPE = "${params.AMI_TYPE}"
       }
       steps {
-          sh 'curl -o https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip'
-          sh 'unzip -o packer_1.5.1_linux_amd64.zip'
+          sh 'wget -c https://releases.hashicorp.com/packer/1.1.0/packer_1.1.0_linux_amd64.zip'
+          sh 'unzip -o packer_1.1.0_linux_amd64.zip'
           sh 'ls -la'
           dir("jenkins-cis-automation/packer/${params.AMI_TYPE}"){
             echo "Switched dir to jenkins-cis-automation/packer/${params.AMI_TYPE}"
