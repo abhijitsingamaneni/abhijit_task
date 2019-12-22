@@ -10,7 +10,7 @@
         "name": "ubuntu-xenial-cis",
         "access_key": "{{user `aws_access_key_id`}}",
         "secret_key": "{{user `aws_secret_key`}}",
-        "subnet_id" : "subnet-064bab9c12b204359"
+        "subnet_id" : "subnet-064bab9c12b204359",
         "region": "us-west-2",
         "source_ami": "{{user `aws_source_ami`}}",
         "instance_type": "t2.xlarge",
