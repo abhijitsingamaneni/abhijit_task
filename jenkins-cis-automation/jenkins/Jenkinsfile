@@ -1,0 +1,83 @@
+pipeline {
+  agent {
+    label 'master'
+  }
+  environment{
+    BRANCH = "${params.BRANCH}"
+  }
+  parameters {
+    string(
+      name: "BRANCH",
+      defaultValue: "master",
+      description: "Branch to build the packer job."
+    )
+    string(
+      name: "AMI_TYPE",
+      defaultValue: "cis",
+      description: "Type of AMI to build"
+    )
+  }
+  stages {
+    stage("Sync the code"){
+      steps {
+          checkout(
+                    [   $class: 'GitSCM',
+                        branches: [[name: "${params.BRANCH}"]],
+                        browser: [$class: 'AssemblaWeb', repoUrl: ''], doGenerateSubmoduleConfigurations: false,
+                        extensions: [[
+                            $class: 'SubmoduleOption',
+                            disableSubmodules: false,
+                            parentCredentials: false,
+                            recursiveSubmodules: true,
+                            reference: '',
+                            trackingSubmodules: false]],
+                        submoduleCfg: [],
+                        userRemoteConfigs: [[
+                            url: "git@github.com:abhijitsingamaneni/abhijit_task.git"]]
+                    ]
+                )
+      }
+    }
+    stage("Execute build"){
+      environment{
+        AMI_TYPE = "${params.AMI_TYPE}"
+        PATH = "${WORKSPACE}/bin:$PATH"
+      }
+      steps {
+        ansiColor('xterm'){
+          sh 'mkdir -p bin/'
+          sh 'curl -o bin/packer.zip https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip'
+          sh 'unzip -od bin bin/packer.zip'
+          dir("packer/${params.AMI_TYPE}"){
+            echo "Switched dir to packer/${params.AMI_TYPE}"
+            sh """
+              /bin/bash -c 'set -o pipefail; packer build -var "ami_target_regions=us-west-2" -var "jenkins_build_id=$BUILD_ID" -var "branch=${params.BRANCH}" ./packer.json | tee packer.out'
+            """
+            stash includes: 'packer.out', name: 'packer.out'
+          }
+        }
+      }
+    }
+    stage("generate property file"){
+      environment {
+        AMI_TYPE= "${params.AMI_TYPE}"
+      }
+      steps {
+        unstash 'packer.out'
+        sh '''USWEST_AMI=$(grep -A 4 ' AMIs were created:' packer.out | grep us-west-2 | awk '{print $2}')
+USEAST_AMI=$(grep -A 4 ' AMIs were created:' packer.out | grep us-east-1 | awk '{print $2}')
+echo USWEST_AMI=$USWEST_AMI >> devops_amis.properties
+echo USEAST_AMI=$USEAST_AMI >> devops_amis.properties
+echo BRANCH=$BRANCH >> devops_amis.properties
+echo AMI_TYPE=$AMI_TYPE >> devops_amis.properties
+          '''
+        archiveArtifacts artifacts: "devops_amis.properties", fingerprint: true
+      }
+    }
+    stage("cleanup workspace"){
+      steps {
+        deleteDir()
+      }
+    }
+  }
+}
