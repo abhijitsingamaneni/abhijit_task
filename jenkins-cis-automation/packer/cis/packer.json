@@ -1,8 +1,8 @@
 {
     "variables": {
       "aws_source_ami": "ami-09eb6a1f3d27274e5",
-      "aws_access_key_id": "",
-      "aws_secret_key": ""
+      "aws_access_key_id": "AKIA3DE27JQWOL3ZQODQ",
+      "aws_secret_key": "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"
     },
     "builders": [
       {
