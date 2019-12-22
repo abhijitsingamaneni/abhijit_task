@@ -47,8 +47,8 @@ pipeline {
           sh 'curl -o bin/packer.zip https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip'
           sh 'unzip -od bin bin/packer.zip'
           sh 'ls -la'
-          dir("packer/${params.AMI_TYPE}"){
-            echo "Switched dir to packer/${params.AMI_TYPE}"
+          dir("jenkins-cis-automation/packer/${params.AMI_TYPE}"){
+            echo "Switched dir to jenkins-cis-automation/packer/${params.AMI_TYPE}"
             sh """
               /bin/bash -c 'set -o pipefail; packer build -var "ami_target_regions=us-west-2" -var "jenkins_build_id=$BUILD_ID" -var "branch=${params.BRANCH}" ./packer.json | tee packer.out'
             """
