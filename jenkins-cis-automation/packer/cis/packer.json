@@ -1,8 +1,8 @@
 {
     "variables": {
       "aws_source_ami": "ami-09eb6a1f3d27274e5",
-      "aws_access_key_id": "AKIA3DE27JQWOL3ZQODQ",
-      "aws_secret_key": "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"
+      "aws_access_key_id": "AKIAY4UHQJIXZBGAEJES",
+      "aws_secret_key": "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"
     },
     "builders": [
       {
@@ -10,14 +10,13 @@
         "name": "ubuntu-xenial-cis",
         "access_key": "{{user `aws_access_key_id`}}",
         "secret_key": "{{user `aws_secret_key`}}",
-        "subnet_id" : "subnet-064bab9c12b204359",
         "region": "us-west-2",
         "source_ami": "{{user `aws_source_ami`}}",
         "iam_instance_profile": "{{user `iam_role`}}",
         "instance_type": "t2.xlarge",
         "ssh_username": "ubuntu",
         "ssh_timeout": "5m",
-        "ami_name": "Optimizely Ubuntu Xenial cis AMI {{isotime | clean_ami_name}}",
+        "ami_name": "Optimizely Ubuntu Xenial cis AMI",
         "ami_regions": ["us-west-2"],
         "run_tags": { "ClusterId": "packer" },
         "tags": { "packer:source_ami": "{{user `aws_source_ami`}}" }
