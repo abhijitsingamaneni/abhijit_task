@@ -17,28 +17,7 @@ pipeline {
       description: "Type of AMI to build"
     )
   }
-  stages {
-    stage("Sync the code"){
-      steps {
-          checkout(
-                    [   $class: 'GitSCM',
-                        branches: [[name: "${params.BRANCH}"]],
-                        browser: [$class: 'AssemblaWeb', repoUrl: ''], doGenerateSubmoduleConfigurations: false,
-                        extensions: [[
-                            $class: 'SubmoduleOption',
-                            disableSubmodules: false,
-                            parentCredentials: false,
-                            recursiveSubmodules: true,
-                            reference: '',
-                            trackingSubmodules: false]],
-                        submoduleCfg: [],
-                        userRemoteConfigs: [[
-                            url: "git@github.com:abhijitsingamaneni/abhijit_task.git"]]
-                    ]
-                )
-      }
-    }
-    stage("Execute build"){
+  stage("Execute build"){
       environment{
         AMI_TYPE = "${params.AMI_TYPE}"
         BRANCH = "${params.BRANCH}"
