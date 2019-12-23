@@ -33,7 +33,7 @@ pipeline {
                             trackingSubmodules: false]],
                         submoduleCfg: [],
                         userRemoteConfigs: [[
-                            url: "https://github.com/abhijitsingamaneni/abhijit_task.git"]]
+                            url: "git@github.com:abhijitsingamaneni/abhijit_task.git"]]
                     ]
                 )
       }
