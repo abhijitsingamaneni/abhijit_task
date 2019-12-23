@@ -1,0 +1,34 @@
+---
+- name: "PRELIM | Install additional packages"
+  package:
+    name:
+      - python-apt
+      # - auditd
+    state: present
+  when: ansible_distribution == 'Ubuntu'
+
+- name: "PRELIM | Install additional packages"
+  package:
+    name:
+      - rpm-python
+      # - audit
+      - ntp
+    state: present
+  when: ansible_distribution == 'CentOS'
+
+- name: "PRELIM | Remove unnecessary packages"
+  package:
+    name:
+      - apport
+      - python3-apport
+    state: absent
+
+- name: "PRELIM | Gather package facts"
+  package_facts:
+    manager: auto
+
+- name: "PRELIM | Check the grub configuration"
+  stat:
+    path: /boot/grub/grub.cfg
+  register: grub_cfg
+...

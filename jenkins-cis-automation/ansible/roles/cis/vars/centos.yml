@@ -1,0 +1,3 @@
+---
+boot_grub_grub_conf: '/boot/grub2/grub.cfg'
+

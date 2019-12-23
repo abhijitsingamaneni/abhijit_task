@@ -1,0 +1,391 @@
+---
+- name: "SCORED | 1.1.1.1 | PATCH | Ensure mounting of cramfs filesystems is disabled"
+  lineinfile:
+      dest: /etc/modprobe.d/CIS.conf
+      regexp: "^(#)?install cramfs(\\s|$)"
+      line: "install cramfs /bin/true"
+      state: present
+      owner: root
+      group: root
+      mode: 0644
+      create: true
+  tags:
+      - level1
+      - scored
+      - patch
+      - cramfs
+      - filesystems
+      - rule_1.1.1.1
+
+- name: "SCORED | 1.1.1.1 | PATCH | Remove cramfs module"
+  modprobe:
+      name: cramfs
+      state: absent
+  tags:
+      - level1
+      - scored
+      - patch
+      - cramfs
+      - filesystems
+      - rule_1.1.1.1
+
+- name: "SCORED | 1.1.1.2 | PATCH | Ensure mounting of freevxfs filesystems is disabled"
+  lineinfile:
+      dest: /etc/modprobe.d/CIS.conf
+      regexp: "^(#)?install freevxfs"
+      line: "install freevxfs /bin/true"
+      state: present
+      create: true
+  tags:
+      - level1
+      - scored
+      - patch
+      - freevxfs
+      - filesystems
+      - rule_1.1.1.2
+
+- name: "SCORED | 1.1.1.2 | PATCH | Remove freevxfs module"
+  modprobe:
+      name: freevxfs
+      state: absent
+  tags:
+      - level1
+      - scored
+      - patch
+      - freevxfs
+      - filesystems
+      - rule_1.1.1.2
+
+- name: "SCORED | 1.1.1.3 | PATCH | Ensure mounting of jffs2 filesystems is disabled"
+  lineinfile:
+      dest: /etc/modprobe.d/CIS.conf
+      regexp: "^(#)?install jffs2(\\s|$)"
+      line: "install jffs2 /bin/true"
+      state: present
+      create: true
+  tags:
+      - level1
+      - scored
+      - patch
+      - jffs2
+      - filesystems
+      - rule_1.1.1.3
+
+- name: "SCORED | 1.1.1.3 | PATCH | Remove jffs2 module"
+  modprobe:
+      name: jffs2
+      state: absent
+  tags:
+      - level1
+      - scored
+      - patch
+      - jffs2
+      - filesystems
+      - rule_1.1.1.3
+
+- name: "SCORED | 1.1.1.4 | PATCH | Ensure mounting of hfs filesystems is disabled"
+  lineinfile:
+      dest: /etc/modprobe.d/CIS.conf
+      regexp: "^(#)?install hfs(\\s|$)"
+      line: "install hfs /bin/true"
+      state: present
+      create: true
+  tags:
+      - level1
+      - scored
+      - patch
+      - hfs
+      - filesystems
+      - rule_1.1.1.4
+
+- name: "SCORED | 1.1.1.4 | PATCH | Remove hfs module"
+  modprobe:
+      name: hfs
+      state: absent
+  tags:
+      - level1
+      - scored
+      - patch
+      - hfs
+      - filesystems
+      - rule_1.1.1.4
+
+- name: "SCORED | 1.1.1.5 | PATCH | Ensure mounting of hfsplus filesystems is disabled"
+  lineinfile:
+      dest: /etc/modprobe.d/CIS.conf
+      regexp: "^(#)?install hfsplus(\\s|$)"
+      line: "install hfsplus /bin/true"
+      state: present
+      create: true
+  tags:
+      - level1
+      - scored
+      - patch
+      - hfsplus
+      - filesystems
+      - rule_1.1.1.5
+
+- name: "SCORED | 1.1.1.5 | PATCH | Remove hfsplus module"
+  modprobe:
+      name: hfsplus
+      state: absent
+  tags:
+      - level1
+      - scored
+      - patch
+      - hfsplus
+      - filesystems
+      - rule_1.1.1.5
+
+- name: "SCORED | 1.1.1.6 | PATCH | Ensure mounting of squashfs filesystems is disabled"
+  lineinfile:
+      dest: /etc/modprobe.d/CIS.conf
+      regexp: "^(#)?install squashfs(\\s|$)"
+      line: "install squashfs /bin/true"
+      state: present
+      create: true
+  tags:
+      - level1
+      - scored
+      - patch
+      - squashfs
+      - filesystems
+      - rule_1.1.1.6
+
+- name: "SCORED | 1.1.1.6 | PATCH | Remove squashfs module"
+  modprobe:
+      name: squashfs
+      state: absent
+  tags:
+      - level1
+      - scored
+      - patch
+      - squashfs
+      - filesystems
+      - rule_1.1.1.6
+
+- name: "SCORED | 1.1.1.7 | PATCH | Ensure mounting of udf filesystems is disabled"
+  lineinfile:
+      dest: /etc/modprobe.d/CIS.conf
+      regexp: "^(#)?install udf(\\s|$)"
+      line: "install udf /bin/true"
+      state: present
+      create: true
+  tags:
+      - level1
+      - scored
+      - patch
+      - udf
+      - filesystems
+      - rule_1.1.1.7
+
+- name: "SCORED | 1.1.1.7 | PATCH | Remove udf module"
+  modprobe:
+      name: udf
+      state: absent
+  tags:
+      - level1
+      - scored
+      - patch
+      - udf
+      - filesystems
+      - rule_1.1.1.7
+
+- name: "SCORED | 1.1.1.8 | PATCH | Ensure mounting of FAT filesystems is disabled"
+  lineinfile:
+      dest: /etc/modprobe.d/CIS.conf
+      regexp: "^(#)?install vfat(\\s|$)"
+      line: "install vfat /bin/true"
+      state: present
+      create: true
+  tags:
+      - level1
+      - scored
+      - patch
+      - vfat
+      - filesystems
+      - rule_1.1.1.8
+
+- name: "SCORED | 1.1.1.8 | PATCH | Remove FAT module"
+  modprobe:
+      name: vfat
+      state: absent
+  tags:
+      - level2
+      - scored
+      - patch
+      - vfat
+      - filesystems
+      - rule_1.1.1.8
+
+- name: "SCORED | 1.1.14 | PATCH | Ensure nodev option set on /dev/shm partition\n
+         SCORED | 1.1.15 | PATCH | Ensure nosuid option set on /dev/shm partition\n
+         SCORED | 1.1.16 | PATCH | Ensure noexec option set on /dev/shm partition"
+  mount:
+      name: /dev/shm
+      src: tmpfs
+      state: mounted
+      fstype: tmpfs
+      opts: "defaults,nodev,nosuid,noexec"
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_1.1.14
+      - rule_1.1.15
+      - rule_1.1.16
+
+- name: "SCORED | 1.4.1 | PATCH | Ensure permissions on bootloader config are configured"
+  file:
+      path: "{{ boot_grub_grub_conf }}"
+      owner: root
+      group: root
+      mode: 0600
+  tags:
+      - level1
+      - scored
+      - grub
+      - patch
+      - rule_1.4.1
+
+- name: "NOT SCORED | 1.4.3 | PATCH | Ensure authentication required for single user mode"
+  block:
+    - name: "NOT SCORED | 1.4.3 | PATCH | File /usr/lib/systemd/system/rescue.service"
+      lineinfile:
+        dest: /usr/lib/systemd/system/rescue.service
+        regexp: "^ExecStart=.+$"
+        line: 'ExecStart=-/bin/sh -c "/sbin/sulogin; /usr/bin/systemctl --fail --no-block default"'
+        state: present
+    - name: "NOT SCORED | 1.4.3 | PATCH | File /usr/lib/systemd/system/emergency.service"
+      lineinfile:
+        dest: /usr/lib/systemd/system/emergency.service
+        regexp: "^ExecStart=.+$"
+        line: 'ExecStart=-/bin/sh -c "/sbin/sulogin; /usr/bin/systemctl --fail --no-block default"'
+        state: present
+  tags:
+      - level1
+      - notscored
+      - limits
+      - patch
+      - rule_1.4.3
+  when: ansible_distribution == 'CentOS'
+
+- name: "SCORED | 1.5.1 | PATCH | Ensure core dumps are restricted"
+  block:
+    - name: "SCORED | 1.5.1 | PATCH | Disable apport"
+      lineinfile:
+        dest: /etc/default/apport
+        regexp: "^enabled=.+$"
+        line: "enabled=0"
+        state: present
+        create: true
+    - name: "SCORED | 1.5.1 | PATCH | Change limits.conf file"
+      lineinfile:
+        state: present
+        dest: /etc/security/limits.conf
+        regexp: '^#?\\*.*core'
+        line: '* hard core 0'
+        insertbefore: '^# End of file'
+    - name: "SCORED | 1.5.1 | PATCH | Change sysctl variable"
+      sysctl:
+        name: fs.suid_dumpable
+        value: 0
+        state: present
+        reload: true
+        sysctl_set: true
+        ignoreerrors: true
+  tags:
+      - level1
+      - scored
+      - limits
+      - patch
+      - rule_1.5.1
+
+- name: "SCORED | 1.7.1.1 | PATCH | Ensure message of the day is configured properly"
+  template:
+      src: etc/motd.j2
+      dest: /etc/motd
+  tags:
+      - level1
+      - scored
+      - patch
+      - banner
+      - rule_1.7.1.1
+
+- name: "NOTSCORED | 1.7.1.2 | PATCH | Ensure local login warning banner is configured properly"
+  template:
+      src: etc/issue.j2
+      dest: /etc/issue
+  tags:
+      - level1
+      - notscored
+      - patch
+      - banner
+      - rule_1.7.1.2
+
+- name: "NOTSCORED | 1.7.1.3 | PATCH | Ensure remote login warning banner is configured properly"
+  template:
+      src: etc/issue.net.j2
+      dest: /etc/issue.net
+  tags:
+      - level1
+      - notscored
+      - patch
+      - banner
+      - rule_1.7.1.3
+
+- name: "NOTSCORED | 1.7.1.4 | PATCH | Ensure permissions on /etc/motd are configured"
+  file:
+      dest: /etc/motd
+      state: file
+      owner: root
+      group: root
+      mode: 0644
+  tags:
+      - level1
+      - notscored
+      - patch
+      - perms
+      - rule_1.7.1.4
+
+- name: "SCORED | 1.7.1.5 | PATCH | Ensure permissions on /etc/issue are configured"
+  file:
+      dest: /etc/issue
+      state: file
+      owner: root
+      group: root
+      mode: 0644
+  tags:
+      - level1
+      - scored
+      - patch
+      - perms
+      - rule_1.7.1.5
+
+- name: "NOTSCORED | 1.7.1.6 | PATCH | Ensure permissions on /etc/issue.net are configured"
+  file:
+      dest: /etc/issue.net
+      state: file
+      owner: root
+      group: root
+      mode: 0644
+  tags:
+      - level1
+      - notscored
+      - patch
+      - perms
+      - rule_1.7.1.6
+
+- name: "NOTSCORED | 1.8 | PATCH | Ensure updates patches and additional security software are installed"
+  yum:
+    name: '*'
+    state: latest
+    update_cache: yes
+  tags:
+      - level1
+      - notscored
+      - patch
+      - rule_1.8
+  when: ansible_distribution == 'CentOS'
+
+...

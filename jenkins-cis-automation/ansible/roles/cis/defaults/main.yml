@@ -1,0 +1,13 @@
+# Section 1 Variables
+# Warning Banner Content (issue, issue.net, motd)
+cis_warning_banner: |
+    Authorized uses only. All activity may be monitored and reported.
+# End Banner
+
+cis_is_router: false # disable system ip_forwarding, if false
+
+cis_is_docker: false # disable docker ip forwarding, if false
+
+cis_time_synchronization_servers:
+  - "{{ aws_ds.ips[0] }}"
+  - "{{ aws_ds.ips[1] }}"

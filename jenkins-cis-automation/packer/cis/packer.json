@@ -21,5 +21,19 @@
         "run_tags": { "ClusterId": "packer" },
         "tags": { "packer:source_ami": "{{user `aws_source_ami`}}" }
       }
-    ]
-  }
+    ],
+    "provisioners": [
+      {
+        "type": "shell",
+        "execute_command": "chmod +x {{ .Path  }}; {{ .Vars  }} sudo -H {{ .Path  }}",
+        "script": "../../bootstrap/setup.sh"
+      },
+      {
+        "type": "ansible-local",
+        "command": "sudo -H ansible-playbook -vvv",
+        "playbook_file": "./site.yml",
+        "playbook_dir": "../../ansible",
+        "pause_before": "30s"
+      }
+   ]
+}

@@ -55,23 +55,6 @@ pipeline {
         }
       }
     }
-    stage("generate property file"){
-      environment {
-        AMI_TYPE= "${params.AMI_TYPE}"
-        BRANCH = "${params.BRANCH}"
-      }
-      steps {
-        unstash 'packer.out'
-        sh '''USWEST_AMI=$(grep -A 4 ' AMIs were created:' packer.out | grep us-west-2 | awk '{print $2}')
-USEAST_AMI=$(grep -A 4 ' AMIs were created:' packer.out | grep us-east-1 | awk '{print $2}')
-echo USWEST_AMI=$USWEST_AMI >> devops_amis.properties
-echo USEAST_AMI=$USEAST_AMI >> devops_amis.properties
-echo BRANCH=$BRANCH >> devops_amis.properties
-echo AMI_TYPE=$AMI_TYPE >> devops_amis.properties
-          '''
-        archiveArtifacts artifacts: "devops_amis.properties", fingerprint: true
-      }
-    }
     stage("cleanup workspace"){
       steps {
         deleteDir()

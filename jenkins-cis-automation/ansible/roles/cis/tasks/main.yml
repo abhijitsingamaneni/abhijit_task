@@ -1,0 +1,17 @@
+---
+- name: Include variables for Ubuntu
+  include_vars: "ubuntu.yml"
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Include variables for CentOS
+  include_vars: "centos.yml"
+  when: ansible_distribution == 'CentOS'
+
+- include: prelim.yml
+  tags:
+      - prelim_tasks
+      - always
+
+- include: section1.yml
+  tags: section1
+...
