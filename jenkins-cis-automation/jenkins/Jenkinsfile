@@ -17,7 +17,8 @@ pipeline {
       description: "Type of AMI to build"
     )
   }
-  stage("Execute build"){
+  stages {
+    stage("Execute build"){
       environment{
         AMI_TYPE = "${params.AMI_TYPE}"
         BRANCH = "${params.BRANCH}"
