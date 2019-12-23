@@ -16,7 +16,7 @@
         "instance_type": "t2.xlarge",
         "ssh_username": "ubuntu",
         "ssh_timeout": "5m",
-        "ami_name": "Optimizely Ubuntu Xenial cis AMI",
+        "ami_name": "Ubuntu Xenial cis AMI",
         "ami_regions": ["us-west-2"],
         "run_tags": { "ClusterId": "packer" },
         "tags": { "packer:source_ami": "{{user `aws_source_ami`}}" }
