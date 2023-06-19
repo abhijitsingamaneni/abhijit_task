@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_abhijit_task_1687189488092-push-trigger-input-set
+  identifier: Build_abhijit_task_1687189488092pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_abhijit_task_1687189488092
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
